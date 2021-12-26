@@ -1,0 +1,41 @@
+import { Image, Text, View, StyleSheet } from "react-native";
+
+const Card = ({ image, name, price }) => {
+  return (
+    <View style={styles.card}>
+      <Image source={image} style={styles.imag} />
+      <View style={styles.low}>
+        <Text style={styles.name}>{name}</Text>
+        <Text style={styles.price}>{price}</Text>
+      </View>
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  card: {
+    borderRadius: 15,
+    backgroundColor: "white",
+    marginBottom: 20,
+    overflow: "hidden",
+  },
+  low: {
+    padding: 20,
+  },
+  imag: {
+    width: "100%",
+    height: 250,
+  },
+  name: {
+    marginBottom: 7,
+    fontSize: 20,
+    fontWeight: "bold",
+  },
+  price: {
+    color: "#4ecdc4",
+    fontSize: 16,
+    fontWeight: "bold",
+  },
+});
+
+export default Card;
