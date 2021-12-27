@@ -1,0 +1,19 @@
+import { SafeAreaView, StatusBar, StyleSheet } from "react-native";
+import Constants from "expo-constants";
+
+const Fixing = ({ children, style }) => {
+  return (
+    <SafeAreaView style={[styles.containe, style]}>{children}</SafeAreaView>
+  );
+};
+
+const styles = StyleSheet.create({
+  containe: {
+    paddingTop: Constants.statusBarHeight,
+    flex: 1,
+    padding: 20,
+    backgroundColor: "#f5f5f5",
+  },
+});
+
+export default Fixing;
