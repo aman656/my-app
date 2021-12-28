@@ -13,6 +13,7 @@ import AppInput from "./components/AppInput";
 import { Switch } from "react-native";
 import { useState } from "react";
 import AppPicker from "./components/AppPicker";
+import LoginScreen from "./app/screens/LoginScreen";
 
 const items = [
   {
@@ -30,19 +31,5 @@ const items = [
 ];
 
 export default function App() {
-  // const [isNew, setisNew] = useState(false);
-  const [selecteditem, setSelected] = useState();
-
-  return (
-    <Fixing>
-      {/* <Switch value={isNew} onValueChange={(val) => setisNew(val)} /> */}
-      <AppPicker
-        name="apps"
-        items={items}
-        selecteditem={selecteditem}
-        onselection={(item) => setSelected(item)}
-      />
-      <AppInput name="email" placeholder="Username" />
-    </Fixing>
-  );
+  return <LoginScreen />;
 }
