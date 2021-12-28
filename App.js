@@ -14,6 +14,7 @@ import { Switch } from "react-native";
 import { useState } from "react";
 import AppPicker from "./components/AppPicker";
 import LoginScreen from "./app/screens/LoginScreen";
+import ProductAddScreen from "./app/screens/ProductAddScreen";
 
 const items = [
   {
@@ -31,5 +32,5 @@ const items = [
 ];
 
 export default function App() {
-  return <LoginScreen />;
+  return <ProductAddScreen />;
 }

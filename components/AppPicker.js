@@ -14,7 +14,7 @@ import Fixing from "../app/screens/Fixing";
 import { useState } from "react";
 import ModalItem from "./ModalItem";
 
-const AppPicker = ({ name, items, selecteditem, onselection }) => {
+const AppPicker = ({ name, items, selecteditem, onselection, placeholder }) => {
   const [show, setShow] = useState(false);
   return (
     <>
@@ -29,7 +29,7 @@ const AppPicker = ({ name, items, selecteditem, onselection }) => {
             />
           )}
           <Text style={styles.inpu}>
-            {selecteditem ? selecteditem : "Category"}
+            {selecteditem ? selecteditem : placeholder}
           </Text>
           <MaterialCommunityIcons
             name="chevron-down"

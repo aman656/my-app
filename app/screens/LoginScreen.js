@@ -1,10 +1,11 @@
 import Fixing from "./Fixing";
-import AppInput from "../../components/AppInput";
-import { Image, StyleSheet, Text } from "react-native";
+import { Image, StyleSheet } from "react-native";
 
-import OurButton from "../../components/OurButton";
-import { Formik } from "formik";
+import FormComponent from "../../components/FormComponent";
+
+import FormButton from "../../components/FormButton";
 import * as Yup from "yup";
+import WholeForm from "../../components/WholeForm";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().required().email().label("Email"),
@@ -15,41 +16,32 @@ const LoginScreen = () => {
   return (
     <Fixing style={styles.container}>
       <Image source={require("../assets/logo-red.png")} style={styles.logo} />
-      <Formik
+      <WholeForm
         initialValues={{ email: "", password: "" }}
         onSubmit={(value) => console.log(value)}
         validationSchema={validationSchema}
       >
-        {({ handleChange, handleSubmit, errors, setFieldTouched, touched }) => (
-          <>
-            <AppInput
-              name="email"
-              placeholder="Email"
-              onChangeText={handleChange("email")}
-              keyboardType="email-address"
-              onBlur={() => setFieldTouched("email")}
-              autoCapitalize="none"
-              autoCorrect={false}
-            />
-            {touched.email && (
-              <Text style={{ color: "red" }}>{errors.email}</Text>
-            )}
-            <AppInput
-              name="lock"
-              onChangeText={handleChange("password")}
-              onBlur={() => setFieldTouched("password")}
-              placeholder="Password"
-              autoCapitalize="none"
-              autoCorrect={false}
-              secureTextEntry
-            />
-            {touched.password && (
-              <Text style={{ color: "red" }}>{errors.password}</Text>
-            )}
-            <OurButton title="Log In" onpress={handleSubmit} given="#fc5c65" />
-          </>
-        )}
-      </Formik>
+        <>
+          <FormComponent
+            name="email"
+            placeholder="Email"
+            keyboardType="email-address"
+            field="email"
+            autoCapitalize="none"
+            autoCorrect={false}
+          />
+
+          <FormComponent
+            name="lock"
+            field="password"
+            placeholder="Password"
+            autoCapitalize="none"
+            autoCorrect={false}
+            secureTextEntry
+          />
+          <FormButton title="Log In" />
+        </>
+      </WholeForm>
     </Fixing>
   );
 };
