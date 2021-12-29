@@ -1,7 +1,6 @@
 import {
   Platform,
   StyleSheet,
-  TextInput,
   Text,
   View,
   Modal,
@@ -14,7 +13,15 @@ import Fixing from "../app/screens/Fixing";
 import { useState } from "react";
 import ModalItem from "./ModalItem";
 
-const AppPicker = ({ name, items, selecteditem, onselection, placeholder }) => {
+const AppPicker = ({
+  name,
+  items,
+  numofColumns,
+  selecteditem,
+  onselection,
+  placeholder,
+  PickerItemComponent = ModalItem,
+}) => {
   const [show, setShow] = useState(false);
   return (
     <>
@@ -43,9 +50,10 @@ const AppPicker = ({ name, items, selecteditem, onselection, placeholder }) => {
           <Button title="Close" onPress={() => setShow(false)} />
           <FlatList
             data={items}
+            numColumns={numofColumns}
             keyExtractor={(item) => item.value}
             renderItem={({ item }) => (
-              <ModalItem
+              <PickerItemComponent
                 data={item}
                 onpress={() => {
                   setShow(false);

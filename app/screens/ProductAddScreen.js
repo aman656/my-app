@@ -4,19 +4,32 @@ import Fixing from "./Fixing";
 import * as Yup from "yup";
 import WholeForm from "../../components/WholeForm";
 import FormPicker from "../../components/FormPicker";
+import CategoryPicker from "../../components/CategoryPicker";
 
 const categories = [
   {
     label: "Furniture",
     value: 1,
+    color: "red",
+    icon: "apps",
   },
   {
     label: "Electronic",
     value: 2,
+    color: "green",
+    icon: "email",
   },
   {
     label: "Sports",
     value: 3,
+    color: "blue",
+    icon: "lock",
+  },
+  {
+    label: "Antique & Furnished",
+    value: 4,
+    color: "black",
+    icon: "bed",
   },
 ];
 
@@ -44,7 +57,9 @@ const ProductAddScreen = () => {
         />
         <FormPicker
           placeholder="Category"
+          PickerItemComponent={CategoryPicker}
           field="category"
+          numofColumns={3}
           items={categories}
         />
         <FormComponent

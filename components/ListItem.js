@@ -6,6 +6,7 @@ import {
   TouchableHighlight,
 } from "react-native";
 import Swipeable from "react-native-gesture-handler/Swipeable";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const ListItem = ({
   image,
@@ -24,9 +25,20 @@ const ListItem = ({
           {IconComponent}
           {image && <Image style={styles.img} source={image} />}
           <View style={styles.low}>
-            <Text style={styles.name}>{name}</Text>
-            {listing && <Text style={styles.listing}>{listing}</Text>}
+            <Text style={styles.name} numberOfLines={2}>
+              {name}
+            </Text>
+            {listing && (
+              <Text style={styles.listing} numberOfLines={2}>
+                {listing}
+              </Text>
+            )}
           </View>
+          <MaterialCommunityIcons
+            name="chevron-right"
+            size={25}
+            color="#6e6969"
+          />
         </View>
       </TouchableHighlight>
     </Swipeable>
@@ -38,6 +50,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     padding: 15,
     backgroundColor: "white",
+    alignItems: "center",
   },
   img: {
     width: 70,
@@ -47,6 +60,7 @@ const styles = StyleSheet.create({
   low: {
     justifyContent: "center",
     marginLeft: 12,
+    flex: 1,
   },
   name: {
     fontWeight: "700",
