@@ -1,4 +1,4 @@
-import { SafeAreaView, StatusBar, StyleSheet } from "react-native";
+import { SafeAreaView, StyleSheet } from "react-native";
 import Constants from "expo-constants";
 
 const Fixing = ({ children, style }) => {

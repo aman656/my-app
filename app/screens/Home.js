@@ -1,7 +1,7 @@
 import { Image, ImageBackground, StyleSheet, Text, View } from "react-native";
 import OurButton from "../../components/OurButton";
 
-const Home = () => {
+const Home = ({ navigation }) => {
   return (
     <ImageBackground
       blurRadius={8}
@@ -15,8 +15,16 @@ const Home = () => {
         </Text>
       </View>
       <View style={styles.custombtn}>
-        <OurButton title="Login" given="#fc5c65" />
-        <OurButton title="Sign Up" given="#4ecdc4" />
+        <OurButton
+          title="Login"
+          given="#fc5c65"
+          onpress={() => navigation.navigate("login")}
+        />
+        <OurButton
+          title="Sign Up"
+          given="#4ecdc4"
+          onpress={() => navigation.navigate("register")}
+        />
       </View>
     </ImageBackground>
   );

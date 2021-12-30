@@ -8,19 +8,21 @@ import {
   Button,
   FlatList,
 } from "react-native";
+import CategoryPicker from "./CategoryPicker";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import Fixing from "../app/screens/Fixing";
 import { useState } from "react";
+
 import ModalItem from "./ModalItem";
 
 const AppPicker = ({
   name,
   items,
   numofColumns,
+  PicketItemComponent = CategoryPicker,
   selecteditem,
   onselection,
   placeholder,
-  PickerItemComponent = ModalItem,
 }) => {
   const [show, setShow] = useState(false);
   return (
@@ -51,11 +53,11 @@ const AppPicker = ({
           <FlatList
             data={items}
             numColumns={numofColumns}
-            keyExtractor={(item) => item.value}
+            keyExtractor={(item) => item.value.toString()}
             renderItem={({ item }) => (
-              <PickerItemComponent
+              <PicketItemComponent
                 data={item}
-                onpress={() => {
+                onPress={() => {
                   setShow(false);
                   onselection(item.label);
                 }}

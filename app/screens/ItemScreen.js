@@ -1,6 +1,7 @@
 import Card from "../../components/Card";
 import Fixing from "./Fixing";
 import { StyleSheet, FlatList } from "react-native";
+import { useLinkTo } from "@react-navigation/native";
 
 const list = [
   {
@@ -17,14 +18,20 @@ const list = [
   },
 ];
 
-const ItemScreen = () => {
+const ItemScreen = ({ navigation }) => {
+  const linking = useLinkTo();
   return (
     <Fixing>
       <FlatList
         data={list}
         keyExtractor={(list) => list.id.toString()}
         renderItem={({ item }) => (
-          <Card name={item.title} price={"$" + item.price} image={item.image} />
+          <Card
+            name={item.title}
+            price={"$" + item.price}
+            image={item.image}
+            onPress={() => linking(`/main/single`)}
+          />
         )}
       />
     </Fixing>

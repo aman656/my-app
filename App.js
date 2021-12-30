@@ -1,3 +1,5 @@
+import * as React from "react";
+
 import Home from "./app/screens/Home";
 import ViewScreen from "./app/screens/ViewScreen";
 import OurButton from "./components/OurButton";
@@ -10,13 +12,21 @@ import ListItem from "./components/ListItem";
 import AccountScreen from "./app/screens/AccountScreen";
 import ItemScreen from "./app/screens/ItemScreen";
 import AppInput from "./components/AppInput";
-import { Button, Switch, Image } from "react-native";
+import { Button, Switch, Image, Text } from "react-native";
 import { useEffect, useState } from "react";
 import AppPicker from "./components/AppPicker";
 import LoginScreen from "./app/screens/LoginScreen";
+import SignUpScreen from "./app/screens/SignUpScreen";
 import ProductAddScreen from "./app/screens/ProductAddScreen";
 import * as ImagePicker from "expo-image-picker";
 import ImageInput from "./components/ImageInput";
+import ImageInputList from "./components/ImageInputList";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { NavigationContainer } from "@react-navigation/native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import AuthNavigation from "./app/Navigation/AuthNavigation";
+import AppNavigation from "./app/Navigation/AppNavigation";
 
 const items = [
   {
@@ -33,32 +43,59 @@ const items = [
   },
 ];
 
-export default function App() {
-  const [imageuri, setImage] = useState();
-  useEffect(() => {
-    const requestPermission = async () => {
-      const result = await ImagePicker.requestCameraPermissionsAsync();
-      if (!result.granted) {
-        alert("You need to give permission in order to proceed");
-      }
-    };
-    requestPermission();
-  }, []);
-  const imageSubmit = async () => {
-    try {
-      const res = await ImagePicker.launchImageLibraryAsync();
-      if (!res.cancelled) {
-        setImage(res.uri);
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  };
+const User = ({ navigation }) => {
   return (
     <Fixing>
-      <Button title="Click" onPress={imageSubmit} />
-      {/* <Image source={{ uri: imageuri }} style={{ width: 200, height: 200 }} /> */}
-      <ImageInput givenuri={imageuri} />
+      <Text>Users</Text>
+      <Button
+        title="Click"
+        onPress={() => navigation.navigate("userdetail", { id: 1 })}
+      />
     </Fixing>
+  );
+};
+const UserDetail = ({ route }) => {
+  return (
+    <Fixing>
+      <Text>User Detail</Text>
+    </Fixing>
+  );
+};
+
+const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
+// const StackNavigator = () => (
+//   <Stack.Navigator>
+//     <Stack.Screen name="user" component={User} />
+//     <Stack.Screen name="userdetail" component={UserDetail} />
+//   </Stack.Navigator>
+// );
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <AppNavigation />
+      {/* <Tab.Navigator
+        screenOptions={{
+          tabBarActiveBackgroundColor: "tomato",
+          tabBarActiveTintColor: "white",
+        }}
+      >
+        <Tab.Screen
+          name="account"
+          component={User}
+          options={{
+            tabBarIcon: ({ color }) => (
+              <MaterialCommunityIcons name="home" size={24} color={color} />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="feed"
+          component={UserDetail}
+          // options={({ route }) => ({ title: route.params.id })}
+        />
+      </Tab.Navigator> */}
+    </NavigationContainer>
   );
 }
