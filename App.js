@@ -27,6 +27,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import AuthNavigation from "./app/Navigation/AuthNavigation";
 import AppNavigation from "./app/Navigation/AppNavigation";
+import { authentication } from "./app/firebase";
 
 const items = [
   {
@@ -72,9 +73,17 @@ const Tab = createBottomTabNavigator();
 // );
 
 export default function App() {
+  const [curruser, setcurruser] = useState(null);
+  const useHandler = (user) => {
+    user ? setcurruser(user) : setcurruser(null);
+  };
+  useEffect(() => {
+    authentication.onAuthStateChanged((user) => useHandler(user));
+  }, []);
+
   return (
     <NavigationContainer>
-      <AppNavigation />
+      {!curruser ? <AuthNavigation /> : <AppNavigation />}
       {/* <Tab.Navigator
         screenOptions={{
           tabBarActiveBackgroundColor: "tomato",

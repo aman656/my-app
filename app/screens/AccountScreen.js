@@ -3,6 +3,7 @@ import Fixing from "./Fixing";
 import { View, StyleSheet, FlatList } from "react-native";
 import Icon from "../../components/Icon";
 import Separator from "../../components/Seperator";
+import { authentication } from "../firebase";
 
 const ourdetail = [
   {
@@ -18,10 +19,19 @@ const ourdetail = [
       name: "email",
       back: "#4ecdc4",
     },
+    targetscreen: "message",
   },
 ];
 
-const AccountScreen = () => {
+const AccountScreen = ({ navigation }) => {
+  const signedOut = async () => {
+    try {
+      await authentication.signOut();
+      console.log("Signed Out");
+    } catch (err) {
+      console.log(err);
+    }
+  };
   return (
     <Fixing style={styles.screen}>
       <View style={styles.container}>
@@ -42,11 +52,13 @@ const AccountScreen = () => {
               IconComponent={
                 <Icon name={item.icon.name} back={item.icon.back} size={50} />
               }
+              onPress={() => navigation.navigate(item.targetscreen)}
             />
           )}
         />
       </View>
       <ListItem
+        onPress={signedOut}
         name="Logout"
         IconComponent={<Icon name="logout" back="#ffe66d" size={50} />}
       />

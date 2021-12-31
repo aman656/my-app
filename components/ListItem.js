@@ -14,13 +14,11 @@ const ListItem = ({
   listing,
   renderRightActions,
   IconComponent,
+  onPress,
 }) => {
   return (
     <Swipeable renderRightActions={renderRightActions}>
-      <TouchableHighlight
-        underlayColor="#e3e1e1"
-        onPress={() => console.log("Works")}
-      >
+      <TouchableHighlight underlayColor="#e3e1e1" onPress={onPress}>
         <View style={styles.main}>
           {IconComponent}
           {image && <Image style={styles.img} source={image} />}

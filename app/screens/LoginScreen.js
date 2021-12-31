@@ -1,10 +1,12 @@
 import Fixing from "./Fixing";
-import { Image, StyleSheet } from "react-native";
+import { Alert, Image, StyleSheet } from "react-native";
 
 import FormComponent from "../../components/FormComponent";
 
 import FormButton from "../../components/FormButton";
 import * as Yup from "yup";
+import { authentication } from "../firebase";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import WholeForm from "../../components/WholeForm";
 
 const validationSchema = Yup.object().shape({
@@ -13,12 +15,24 @@ const validationSchema = Yup.object().shape({
 });
 
 const LoginScreen = () => {
+  const onLogging = async (email, password) => {
+    try {
+      const user = await signInWithEmailAndPassword(
+        authentication,
+        email,
+        password
+      );
+      console.log("Success", user);
+    } catch (err) {
+      Alert.alert(err.message);
+    }
+  };
   return (
     <Fixing style={styles.container}>
       <Image source={require("../assets/logo-red.png")} style={styles.logo} />
       <WholeForm
         initialValues={{ email: "", password: "" }}
-        onSubmit={(value) => console.log(value)}
+        onSubmit={(value) => onLogging(value.email, value.password)}
         validationSchema={validationSchema}
       >
         <>

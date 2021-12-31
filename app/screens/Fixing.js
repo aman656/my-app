@@ -11,7 +11,8 @@ const styles = StyleSheet.create({
   containe: {
     paddingTop: Constants.statusBarHeight,
     flex: 1,
-    padding: 20,
+    padding: 10,
+    marginTop: 10,
     backgroundColor: "#f5f5f5",
   },
 });
