@@ -5,7 +5,7 @@ const Card = ({ image, name, price, onpress }) => {
   return (
     <TouchableWithoutFeedback onPress={onpress}>
       <View style={styles.card}>
-        <Image source={image} style={styles.imag} />
+        <Image source={{ uri: image }} style={styles.imag} />
         <View style={styles.low}>
           <Text style={styles.name}>{name}</Text>
           <Text style={styles.price}>{price}</Text>

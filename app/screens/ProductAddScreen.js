@@ -7,8 +7,8 @@ import FormPicker from "../../components/FormPicker";
 import CategoryPicker from "../../components/CategoryPicker";
 import FormImagePicker from "../../components/FormImagePicker";
 import * as Location from "expo-location";
-import { useEffect } from "react";
-import { useState } from "react/cjs/react.development";
+import { useState, useEffect } from "react";
+import listingsApi from "../api/listings";
 
 const categories = [
   {
@@ -47,6 +47,7 @@ const validationSchema = Yup.object().shape({
 
 const ProductAddScreen = () => {
   const [getlocation, setLocation] = useState();
+
   useEffect(() => {
     const LocationGetting = async () => {
       const loc = await Location.requestBackgroundPermissionsAsync();
@@ -57,10 +58,19 @@ const ProductAddScreen = () => {
           coords: { latitude, longitude },
         } = await Location.getLastKnownPositionAsync();
         setLocation({ latitude, longitude });
+        console.log(getlocation);
       }
     };
     LocationGetting();
   }, []);
+
+  const handleSubmit = async (listing) => {
+    const result = await listingsApi.addListing({ ...listing, getlocation });
+
+    if (!result.ok) {
+      return alert("Could not save the listing");
+    }
+  };
   return (
     <Fixing>
       <WholeForm
@@ -69,10 +79,10 @@ const ProductAddScreen = () => {
           title: "",
           price: "",
           desc: "",
-          category: null,
+          category: "Furniture",
           images: [],
         }}
-        onSubmit={(values) => console.log(getlocation)}
+        onSubmit={handleSubmit}
       >
         <FormImagePicker field="images" />
         <FormComponent placeholder="Title" field="title" autoCorrect={false} />

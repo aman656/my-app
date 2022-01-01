@@ -12,4 +12,4 @@ const ActivityIndicator = ({ show }) => {
 const styles = StyleSheet.create({
   container: {},
 });
-// export default ActivityIndicator;
+export default ActivityIndicator;

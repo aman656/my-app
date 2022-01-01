@@ -12,15 +12,15 @@ const NavigationButton = ({ onPress }) => {
 };
 const styles = StyleSheet.create({
   container: {
-    width: 60,
-    height: 60,
+    width: 70,
+    height: 70,
 
     alignItems: "center",
     backgroundColor: "tomato",
     borderWidth: 5,
-    borderRadius: 30,
+    borderRadius: 35,
     justifyContent: "center",
-    bottom: 15,
+    bottom: 20,
     borderColor: "white",
   },
 });

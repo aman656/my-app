@@ -83,7 +83,7 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      {!curruser ? <AuthNavigation /> : <AppNavigation />}
+      {curruser ? <AppNavigation /> : <AuthNavigation />}
       {/* <Tab.Navigator
         screenOptions={{
           tabBarActiveBackgroundColor: "tomato",
