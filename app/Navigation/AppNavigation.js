@@ -1,16 +1,45 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import AccountScreen from "../screens/AccountScreen";
 import ItemScreen from "../screens/ItemScreen";
+import * as Notifications from "expo-notifications";
+import { useEffect } from "react";
 import ProductAddScreen from "../screens/ProductAddScreen";
 import ItemNavigation from "./ItemNavigation";
 import React from "react";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import PersonalNavigation from "./PersonalNavigation";
 import NavigationButton from "./NavigationButton";
+import { useContext } from "react";
+import AuthContext from "../authcontext/context";
+import { db } from "../firebase";
+import { addDoc, collection, setDoc, doc } from "firebase/firestore";
 
 const Tabs = createBottomTabNavigator();
+const pushCollections = collection(db, "pushToken");
 
 const AppNavigation = () => {
+  const { curruser } = useContext(AuthContext);
+  useEffect(() => {
+    const requestNotifications = async () => {
+      try {
+        const permission = await Notifications.getPermissionsAsync();
+        if (!permission.granted) {
+          return null;
+        }
+        const token = await Notifications.getExpoPushTokenAsync();
+        setDoc(doc(db, "pushToken", curruser.email), {
+          email: curruser.email,
+          token: token,
+        });
+
+        console.log(token);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    requestNotifications();
+  }, []);
+
   return (
     <Tabs.Navigator
       screenOptions={{ tabBarActiveTintColor: "tomato", headerShown: false }}

@@ -14,13 +14,13 @@ const AuthNavigation = () => {
         options={{ headerShown: false }}
       />
       <AuthStack.Screen
-        name="login"
-        component={LoginScreen}
+        name="register"
+        component={SignUpScreen}
         options={{ headerShown: false }}
       />
       <AuthStack.Screen
-        name="register"
-        component={SignUpScreen}
+        name="login"
+        component={LoginScreen}
         options={{ headerShown: false }}
       />
     </AuthStack.Navigator>

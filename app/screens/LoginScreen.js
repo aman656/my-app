@@ -22,7 +22,6 @@ const LoginScreen = () => {
         email,
         password
       );
-      console.log("Success", user);
     } catch (err) {
       Alert.alert(err.message);
     }

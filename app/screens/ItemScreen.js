@@ -1,30 +1,14 @@
 import Card from "../../components/Card";
 import Fixing from "./Fixing";
-import { StyleSheet, FlatList, View, Text } from "react-native";
-
+import { FlatList, View, Text } from "react-native";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import OurButton from "../../components/OurButton";
+import cache from "../utility/cache";
 import ActivityIndicator from "../../components/ActivityIndicator";
+import navigation from "../utility/navigationRef";
 
-// const list = [
-//   {
-//     title: "Coat",
-//     id: 1,
-//     price: 150,
-//     image: require("../assets/coat.jpg"),
-//     target: "single",
-//   },
-//   {
-//     title: "Camera",
-//     id: 2,
-//     price: 200,
-//     image: require("../assets/camera.jpg"),
-//     target: "single",
-//   },
-// ];
-
-const ItemScreen = ({ navigation }) => {
+const ItemScreen = () => {
   const [list, setList] = useState([]);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -34,10 +18,17 @@ const ItemScreen = ({ navigation }) => {
       const response = await axios.get(
         "http://192.168.3.103:9000/api/listings"
       );
-      setLoading(false);
-      console.log(response.status);
-      setError(false);
-      setList(response.data);
+      if (response.status === 200) {
+        setLoading(false);
+        await cache.setCache("api/listings", response.data);
+        setError(false);
+        setList(response.data);
+      } else {
+        const data = await cache.getCache("api/listings");
+        setLoading(false);
+        setList(data);
+        setError(false);
+      }
     } catch (err) {
       setLoading(false);
       setError(true);
@@ -67,7 +58,7 @@ const ItemScreen = ({ navigation }) => {
             name={item.title}
             price={"$" + item.price}
             image={item.images[0].url}
-            onpress={() => navigation.navigate(item.target)}
+            onpress={() => navigation.navigate("single")}
           />
         )}
       />

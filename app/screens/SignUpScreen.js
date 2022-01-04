@@ -15,7 +15,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { collection, addDoc } from "firebase/firestore";
 import * as Yup from "yup";
 import WholeForm from "../../components/WholeForm";
-import { useState } from "react/cjs/react.development";
+import { useState } from "react";
 
 const validationSchema = Yup.object().shape({
   name: Yup.string().required().label("Name"),

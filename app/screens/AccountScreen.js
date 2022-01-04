@@ -4,6 +4,8 @@ import { View, StyleSheet, FlatList } from "react-native";
 import Icon from "../../components/Icon";
 import Separator from "../../components/Seperator";
 import { authentication } from "../firebase";
+import { useContext } from "react";
+import AuthContext from "../authcontext/context";
 
 const ourdetail = [
   {
@@ -24,6 +26,7 @@ const ourdetail = [
 ];
 
 const AccountScreen = ({ navigation }) => {
+  const { curruser } = useContext(AuthContext);
   const signedOut = async () => {
     try {
       await authentication.signOut();
@@ -32,12 +35,13 @@ const AccountScreen = ({ navigation }) => {
       console.log(err);
     }
   };
+
   return (
     <Fixing style={styles.screen}>
       <View style={styles.container}>
         <ListItem
           name="Aman Siddiqui"
-          listing="amansiddiqui@gmail.com"
+          listing={curruser.email}
           image={require("../assets/no.jpg")}
         />
       </View>
