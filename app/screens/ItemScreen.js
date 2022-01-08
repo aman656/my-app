@@ -58,7 +58,7 @@ const ItemScreen = () => {
             name={item.title}
             price={"$" + item.price}
             image={item.images[0].url}
-            onpress={() => navigation.navigate("single")}
+            onpress={() => navigation.navigate("single", item)}
           />
         )}
       />

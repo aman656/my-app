@@ -1,6 +1,10 @@
-import { Image, Text, View, StyleSheet } from "react-native";
-import { TouchableWithoutFeedback } from "react-native-gesture-handler";
-import navigation from "../app/utility/navigationRef";
+import {
+  Image,
+  Text,
+  View,
+  StyleSheet,
+  TouchableWithoutFeedback,
+} from "react-native";
 
 const Card = ({ image, name, price, onpress }) => {
   return (
